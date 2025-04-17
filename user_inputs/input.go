@@ -5,12 +5,16 @@ import (
 	"fmt"
 	"os"
 	"strings"
+	"strconv"
 )
-
-func GetStartingMoney() float64 {
-	fmt.Println("Enter Your Starting Money.")
+// TODO: Need to add the errors that are return
+func GetMoney() float64 {
 	fmt.Print("> ")
-	
+	reader := bufio.NewReader(os.Stdin)
+	sentence, _ := reader.ReadString('\n')
+	trimedSentence := strings.TrimSpace(sentence)
+	money, _ := strconv.ParseFloat(trimedSentence, 64)
+	return money
 }
 
 func GetMachineName() string {
