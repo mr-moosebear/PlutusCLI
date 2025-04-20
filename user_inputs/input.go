@@ -7,6 +7,15 @@ import (
 	"strings"
 	"strconv"
 )
+
+func GetSpins() int {
+	fmt.Print("> ")
+	reader := bufio.NewReader(os.Stdin)
+	sentence, _ := reader.ReadString('\n')
+	trimedSentence := strings.TrimSpace(sentence)
+	bet, _ := strconv.Atoi(trimedSentence)
+	return bet
+}
 // TODO: Need to add the errors that are return
 func GetMoney() float64 {
 	fmt.Print("> ")
