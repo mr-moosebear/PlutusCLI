@@ -1,10 +1,8 @@
 package main
 
 import (
-	//"encoding/json"
 	"fmt"
 	"input"
-	//"os"
 	"save_load"
 )
 
@@ -13,17 +11,6 @@ import (
 	StartingMoney float64 `json:"startingMoney"`
 	Bet float64 `json:"bet"`
 	Spins int `json:"spins"`
-}
-
-func save(data MachineData) {
-	file, _ := os.Create("hello.json")
-	defer file.Close()
-	encoder := json.NewEncoder(file)
-	encoder.SetIndent("", "  ") //NOTE: Might need work or need gone
-	encode := encoder.Encode(data)
-	if encode != nil {
-		fmt.Println("hmmm")
-	}
 }*/
 
 func main() {
@@ -37,7 +24,8 @@ func main() {
 	spins := input.GetSpins()
 
 	info := save_load.MachineData{ MachineName: name, StartingMoney: money, Bet: bet, Spins: spins }
-	//save(info)
 	save_load.Save(info)
-	fmt.Println(info.MachineName, info.StartingMoney, info.Bet, info.Spins)
+	t, _ := save_load.LoadFile()
+	fmt.Println("Saved file is ", info.MachineName, info.StartingMoney, info.Bet, info.Spins)
+	fmt.Println("Load file struct is", t, t.Bet)
 }

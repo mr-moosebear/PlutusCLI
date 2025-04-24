@@ -1,6 +1,7 @@
 {
-  "machineName": "hello",
-  "startingMoney": 15.23,
+  "machineName": "hel",
+  "startingMoney": 15.66,
   "bet": 1,
-  "spins": 10
+  "spins": 10,
+  "totalMoneyAdded": 0
 }
