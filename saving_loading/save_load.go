@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"path/filepath"
 	"os"
+	"strings"
 )
 
 type MachineData struct {
@@ -17,6 +18,8 @@ type MachineData struct {
 
 func LoadFile() (MachineData, error) {
 	var fileData MachineData
+	t := getFileNames()
+	fmt.Println("File Names are ", t)
 	filepath := filepath.Join("data", "amount.json")
 	file, err := os.Open(filepath)
 	if err != nil {
@@ -27,12 +30,25 @@ func LoadFile() (MachineData, error) {
 	err = decoder.Decode(&fileData)
 	return fileData, err
 }
-func createFileName(str string) {
-	
+func getFileNames() []string {
+	files, _ := os.ReadDir("data")
+	var fileNames []string
+	for _, file := range files {
+		fileNames = append(fileNames, file.Name())
+	}
+	return fileNames
+
+}
+func createFileName(str string) string {
+	splitStrings := strings.Split(str, " ")
+	name := strings.Join(splitStrings, "")
+	fileNames := []string{name, ".json"}
+	fileName := strings.Join(fileNames, "")
+	return fileName
 }
 func Save(data MachineData) {
-	filepath := filepath.Join("data", "amount.json")
-	//fmt.Println(filePath)
+	name := createFileName(data.MachineName)
+	filepath := filepath.Join("data", name)
 	file, _ := os.Create(filepath)
 	defer file.Close()
 	encoder := json.NewEncoder(file)
